@@ -6,6 +6,9 @@ export type SearchRecordsRequest = {
   limit: number;
   offset: number;
 };
+export type BuyerRequest = {
+  buyer?: string
+};
 
 export type ProcurementRecord = {
   id: string;
@@ -22,10 +25,19 @@ export type ProcurementRecord = {
   awardDate?: string
 };
 
+export type BuyerRecord = {
+  id: string,
+  name: string,
+}
+
 export type SearchRecordsResponse = {
   records: ProcurementRecord[];
   endOfResults: boolean;
 };
+
+export type BuyerResponse = {
+  buyers: BuyerRecord[]
+}
 
 class Api {
   async searchRecords(
@@ -40,6 +52,18 @@ class Api {
     });
     return await response.json();
   }
+  async fetchBuyers(
+    request: BuyerRequest
+  ): Promise<BuyerResponse> {
+    const response = await fetch("/api/buyers", {
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(request),
+    });
+    return await response.json();
+  }
+  
 }
 
 export default Api;

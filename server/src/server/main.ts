@@ -178,6 +178,31 @@ app.post("/api/records", async (req, res) => {
   res.json(response);
 });
 
+app.post('/api/buyers', async(req, res)=>{
+  console.log("Hello there ...")
+  const payload = req.body as {buyer: string}
+  let buyers = await sequelize.query(
+    "SELECT * FROM buyers",
+    {
+      model: Buyer,
+    }
+  );
+
+  if(payload.buyer){
+    buyers = await sequelize.query(
+      "SELECT id, name FROM buyers WHERE name LIKE :buyerQuery",
+      {
+        model: Buyer,
+        replacements:{
+          buyerQuery: `%${payload.buyer}%`
+        }
+      }
+    )
+  }
+
+  res.json({ buyers })
+})
+
 app.listen(app.get("port"), () => {
   console.log("  App is running at http://localhost:%d", app.get("port"));
   console.log("  Press CTRL-C to stop\n");
