@@ -53,3 +53,27 @@ If for any reason the database becomes unusable, you can rebuild it using `./res
 ## The task
 
 All the instructions are available [here](https://www.notion.so/stotles/Full-stack-software-engineer-work-sample-assignment-ae7c64e08f2a42a097d16cee4bc661fc).
+
+
+## Thoughts and considerations
+
+It was a good challenge to work on. Alot of interaction with the API and querying the database. I learnt new technologies such as sequalize, and AntD components.
+
+### Some of the challenges I faced
+
+Mostly time constraints. I was not able to implement everything I have in mind, however I have a working solution that meets the requirements.
+
+### What I would add if I had more time
+
+* The UI structure could have been better. I would have liked to implement a better UI structure and make it more user friendly.
+* Separate the logic into composable hooks which can be reused in other components.
+* Instead of using component start for the filters, I would have added the filters to the URL so that the user can share the URL with the filters applied, bookmark it, refreshing the page without loosing the filters and also having a shared state between the components.
+* Instead of hardcoding the page size, I would have added a dropdown to select the page size.
+* Something to also add is the better debouncing of the text search. The solution currently is to make a request if the text length is greater than 3. A better solution would be to debounce the text search so that the request is only made after the user has stopped typing for a certain amount of time.
+
+In the backend:
+
+* Handling the text search currently wouldn't be efficient for large datasets. I would have implemented a full text search using Postgres or ElasticSearch.
+* The above would be implemented for the buyers selector as well.
+
+

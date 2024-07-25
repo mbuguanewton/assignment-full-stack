@@ -1,7 +1,6 @@
 import { Input } from "antd";
-import React, { useMemo } from "react";
+import React from "react";
 import BuyerSelector from "./BuyerSelector";
-import { ProcurementRecord } from "./Api";
 import {Button} from 'antd'
 
 export type SearchFilters = {
@@ -11,12 +10,11 @@ export type SearchFilters = {
 
 type Props = {
   filters: SearchFilters;
-  records: ProcurementRecord[]
   onChange: (newFilters: SearchFilters) => void;
 };
 
 function RecordSearchFilters(props: Props) {
-  const { filters,records, onChange } = props;
+  const { filters, onChange } = props;
 
   const handleQueryChange = React.useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -38,16 +36,6 @@ function RecordSearchFilters(props: Props) {
     [onChange, filters]
   );
 
-  const buyers = useMemo(()=>{
-    if(!Array.isArray(records)) return []
-
-    const allBuyers = records.map((record)=> ({
-      value: record.buyer.name,
-      label: record.buyer.name
-    }))
-    return allBuyers
-  },[records])
-
   return (
     <div>
     <div style={{display: "flex", alignItems:"center", justifyContent:"space-between", gap: 10, marginBottom: 10}}>
@@ -56,7 +44,7 @@ function RecordSearchFilters(props: Props) {
         value={filters.query}
         onChange={handleQueryChange}
       />
-      <BuyerSelector initialBuyers={buyers} onSelect={handleFilterChange} value={filters.buyer} /> 
+      <BuyerSelector onSelect={handleFilterChange} value={filters.buyer} /> 
     </div>
     {filters.buyer && <Button style={{ marginBottom: 10  }} onClick={()=> onChange({...filters, buyer: ""})}>Reset Filters</Button>}
     </div>
