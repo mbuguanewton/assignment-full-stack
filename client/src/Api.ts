@@ -56,6 +56,7 @@ class Api {
     request: BuyerRequest
   ): Promise<BuyerResponse> {
     const response = await fetch("/api/buyers", {
+      method: "POST",
       headers: {
         "content-type": "application/json",
       },

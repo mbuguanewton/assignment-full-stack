@@ -2,6 +2,7 @@ import { Input } from "antd";
 import React, { useMemo } from "react";
 import BuyerSelector from "./BuyerSelector";
 import { ProcurementRecord } from "./Api";
+import {Button} from 'antd'
 
 export type SearchFilters = {
   query: string;
@@ -48,6 +49,7 @@ function RecordSearchFilters(props: Props) {
   },[records])
 
   return (
+    <div>
     <div style={{display: "flex", alignItems:"center", justifyContent:"space-between", gap: 10, marginBottom: 10}}>
       <Input
         placeholder="Search text..."
@@ -55,6 +57,8 @@ function RecordSearchFilters(props: Props) {
         onChange={handleQueryChange}
       />
       <BuyerSelector initialBuyers={buyers} onSelect={handleFilterChange} value={filters.buyer} /> 
+    </div>
+    {filters.buyer && <Button style={{ marginBottom: 10  }} onClick={()=> onChange({...filters, buyer: ""})}>Reset Filters</Button>}
     </div>
   );
 }

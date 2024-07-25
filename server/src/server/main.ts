@@ -179,28 +179,37 @@ app.post("/api/records", async (req, res) => {
 });
 
 app.post('/api/buyers', async(req, res)=>{
-  console.log("Hello there ...")
   const payload = req.body as {buyer: string}
   let buyers = await sequelize.query(
-    "SELECT * FROM buyers",
+    "SELECT id, name FROM buyers LIMIT :limit",
     {
       model: Buyer,
+      replacements:{
+        limit: 15
+      }
     }
   );
 
   if(payload.buyer){
     buyers = await sequelize.query(
-      "SELECT id, name FROM buyers WHERE name LIKE :buyerQuery",
+      "SELECT id, name FROM buyers WHERE name LIKE :buyerQuery LIMIT :limit",
       {
         model: Buyer,
         replacements:{
-          buyerQuery: `%${payload.buyer}%`
+          buyerQuery: `%${payload.buyer}%`,
+          limit: 15
         }
       }
     )
   }
 
-  res.json({ buyers })
+  // format buyers to {value: string, label: string} format
+  const response = buyers.map((buyer)=> ({
+    value: buyer.name,
+    label: buyer.name
+  }))
+
+  res.json({ buyers: response })
 })
 
 app.listen(app.get("port"), () => {
