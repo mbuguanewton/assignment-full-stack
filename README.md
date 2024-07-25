@@ -61,14 +61,14 @@ It was a good challenge to work on. Alot of interaction with the API and queryin
 
 ### Some of the challenges I faced
 
-Mostly time constraints. I was not able to implement everything I have in mind, however I have a working solution that meets the requirements.
+Mostly time constraints. I was not able to implement everything I had in mind, however I have a working solution that meets the requirements.
 
 ### What I would add if I had more time
 
 * The UI structure could have been better. I would have liked to implement a better UI structure and make it more user friendly.e.g separate components for example in a components folder, put the Api class in a utils folder, add path aliases for cleaner imports.
 * Add hooks to separate the logic and functionality from the components.
-* Instead of using component start for the filters, I would have added the filters to the URL so that the user can share the URL with the filters applied, bookmark it, refreshing the page without loosing the filters and also having a shared state between the components.
-* Instead of hardcoding the page size, I would have added a dropdown to select the page size.
+* Instead of using component state for the filters, I would have added the filters to the URL so that the user can share the URL with the filters applied, bookmark it, refreshing the page without loosing the filters and also having a shared state between the components.
+* Instead of hard-coding the page size, I would have added a dropdown to select the page size.
 * Something to also add is the better debouncing of the text search. The solution currently is to make a request if the text length is greater than 3. A better solution would be to debounce the text search so that the request is only made after the user has stopped typing for a certain amount of time.
 * Implement the fetching with `React Query` for better caching and data fetching.
 
