@@ -54,7 +54,20 @@ function RecordsTable(props: Props) {
         title: "Stage",
         render:(record: ProcurementRecord)=> {
           // do something here ...
-          return record.stage
+          if(record.stage === "CONTRACT"){
+            return `Awarded on ${new Date(record.awardDate).toDateString()}`
+          }else {
+            if(!record.closeDate) return "Open until -"
+
+            // check if close date is in the future
+            const close = new Date(record.closeDate)
+            const today = new Date().getTime()
+
+            if(close.getTime() > today){
+              return `Open until ${close.toDateString()}`
+            }
+            return "Closed"
+          }
         }
       }
 
