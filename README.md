@@ -65,15 +65,14 @@ Mostly time constraints. I was not able to implement everything I have in mind, 
 
 ### What I would add if I had more time
 
-* The UI structure could have been better. I would have liked to implement a better UI structure and make it more user friendly.
-* Separate the logic into composable hooks which can be reused in other components.
+* The UI structure could have been better. I would have liked to implement a better UI structure and make it more user friendly.e.g separate components for example in a components folder, put the Api class in a utils folder, add path aliases for cleaner imports.
+* Add hooks to separate the logic and functionality from the components.
 * Instead of using component start for the filters, I would have added the filters to the URL so that the user can share the URL with the filters applied, bookmark it, refreshing the page without loosing the filters and also having a shared state between the components.
 * Instead of hardcoding the page size, I would have added a dropdown to select the page size.
 * Something to also add is the better debouncing of the text search. The solution currently is to make a request if the text length is greater than 3. A better solution would be to debounce the text search so that the request is only made after the user has stopped typing for a certain amount of time.
+* Implement the fetching with `React Query` for better caching and data fetching.
 
 In the backend:
 
 * Handling the text search currently wouldn't be efficient for large datasets. I would have implemented a full text search using Postgres or ElasticSearch.
 * The above would be implemented for the buyers selector as well.
-
-
