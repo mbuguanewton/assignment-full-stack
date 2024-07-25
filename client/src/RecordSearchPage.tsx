@@ -22,7 +22,10 @@ function RecordSearchPage() {
   const [page, setPage] = React.useState<number>(1);
   const [searchFilters, setSearchFilters] = React.useState<SearchFilters>({
     query: "",
+    buyer:""
   });
+
+  console.log('searchFilters', searchFilters)
 
   const [records, setRecords] = React.useState<
     ProcurementRecord[] | undefined
@@ -62,6 +65,7 @@ function RecordSearchPage() {
     <>
       <RecordSearchFilters
         filters={searchFilters}
+        records={records}
         onChange={handleChangeFilters}
       />
       {records && (
