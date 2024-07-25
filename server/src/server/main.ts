@@ -145,7 +145,7 @@ async function serializeProcurementRecords(
 app.post("/api/records", async (req, res) => {
   const requestPayload = req.body as RecordSearchRequest;
 
-  const { limit, offset } = requestPayload;
+  const { limit, offset, filters } = requestPayload;
 
   if (limit === 0 || limit > 100) {
     res.status(400).json({ error: "Limit must be between 1 and 100." });
@@ -170,6 +170,10 @@ app.post("/api/records", async (req, res) => {
     ),
     endOfResults: records.length <= limit, // in this case we've reached the end of results
   };
+
+  if(filters.buyer){
+    response.records = response.records.filter((record)=> record.buyer.name === filters.buyer)
+  }
 
   res.json(response);
 });
