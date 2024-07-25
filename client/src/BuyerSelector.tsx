@@ -1,4 +1,4 @@
-import React,{ useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import {Select} from 'antd'
 import Api from './Api'
 
@@ -9,18 +9,7 @@ type BuyerSelectorProps = {
 }
 
 function BuyerSelector({ initialBuyers, onSelect, value }:BuyerSelectorProps) {
-  const {buyers, getBuyers} = useBuyers(initialBuyers)
-  return (
-    <Select showSearch value={value} placeholder='Filter by buyer' optionFilterProp='label' options={buyers}  onChange={(value)=> onSelect(value)} style={{ maxWidth: 300, minWidth: 300}} onSearch={async(val)=>{
-      // add better debounce
-      if(val.length < 3) return
-      await getBuyers(val)
-    }} /> 
-  )
-}
-
-function useBuyers(initial: any[]){
-    const [buyers, setBuyers] = useState(initial)
+  const [buyers, setBuyers] = useState(initialBuyers)
 
     const getBuyers = useCallback(async(buyer?: string)=>{
       const api = new Api();
@@ -35,8 +24,14 @@ function useBuyers(initial: any[]){
 
     useEffect(() => {
       getBuyers()
-    }, [getBuyers]);
-    return {buyers, getBuyers}
+    }, [getBuyers, value]);
+  return (
+    <Select showSearch value={value} placeholder='Filter by buyer' optionFilterProp='label' options={buyers}  onChange={(value)=> onSelect(value)} style={{ maxWidth: 300, minWidth: 300}} onSearch={async(val)=>{
+      // add better debounce
+      if(val.length < 3) return
+      await getBuyers(val)
+    }} /> 
+  )
 }
 
 export default BuyerSelector
