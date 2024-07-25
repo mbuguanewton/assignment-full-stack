@@ -14,6 +14,8 @@ function RecordsTable(props: Props) {
     ProcurementRecord | undefined
   >();
 
+  console.log("Records",records)
+
   const columns = React.useMemo<ColumnType<ProcurementRecord>[]>(() => {
     return [
       {
@@ -39,6 +41,18 @@ function RecordsTable(props: Props) {
         title: "Buyer name",
         render: (record: ProcurementRecord) => record.buyer.name,
       },
+      {
+        title: "Value",
+        render: (record: ProcurementRecord)=> record.value
+      },
+      {
+        title: "Stage",
+        render:(record: ProcurementRecord)=> {
+          // do something here ...
+          return record.stage
+        }
+      }
+
     ];
   }, []);
   return (

@@ -102,6 +102,10 @@ function serializeProcurementRecord(
       id: buyer.id,
       name: buyer.name,
     },
+    value: record.value,
+    stage: record.stage,
+    awardDate: record.award_date,
+    closeDate: record.close_date,
   };
 }
 
