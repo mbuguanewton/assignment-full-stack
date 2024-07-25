@@ -14,8 +14,6 @@ function RecordsTable(props: Props) {
     ProcurementRecord | undefined
   >();
 
-  console.log("Records",records)
-
   const columns = React.useMemo<ColumnType<ProcurementRecord>[]>(() => {
     return [
       {
@@ -43,7 +41,14 @@ function RecordsTable(props: Props) {
       },
       {
         title: "Value",
-        render: (record: ProcurementRecord)=> record.value
+        render: (record: ProcurementRecord)=> {
+          let valueWithCurrency = "-"
+          if(record.value){
+            valueWithCurrency = new Intl.NumberFormat("en-GB", { style: 'currency', currency:"GBP", maximumFractionDigits:0}).format(record.value)
+          }
+
+          return valueWithCurrency
+        }
       },
       {
         title: "Stage",

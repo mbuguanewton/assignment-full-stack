@@ -13,7 +13,7 @@ export type ProcurementRecord = {
     id: string;
     name: string;
   };
-  value: string
+  value?: number
   stage: string
   closeDate?: string
   awardDate?: string
