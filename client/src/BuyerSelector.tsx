@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useState } from 'react'
 import {Select} from 'antd'
-import Api from './Api'
+import Api, { BuyerRecord } from './Api'
 
 type BuyerSelectorProps = {
-    initialBuyers: any[],
     value: string,
     onSelect: (value: string)=> void
 }
 
-function BuyerSelector({ initialBuyers, onSelect, value }:BuyerSelectorProps) {
-  const [buyers, setBuyers] = useState(initialBuyers)
+
+function BuyerSelector({ onSelect, value }:BuyerSelectorProps) {
+  const [buyers, setBuyers] = useState<BuyerRecord[]>([])
 
     const getBuyers = useCallback(async(buyer?: string)=>{
       const api = new Api();

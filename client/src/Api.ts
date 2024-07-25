@@ -26,8 +26,8 @@ export type ProcurementRecord = {
 };
 
 export type BuyerRecord = {
-  id: string,
-  name: string,
+  value: string,
+  label: string,
 }
 
 export type SearchRecordsResponse = {
